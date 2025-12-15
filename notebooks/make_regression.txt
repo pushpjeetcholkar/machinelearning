@@ -1,0 +1,68 @@
+
+make_regression(
+    n_samples=500,
+    n_features=10,
+    n_informative=5,
+    noise=25.8,
+    random_state=0
+)
+
+
+Here’s exactly what each parameter controls — and what it actually means in practice:
+
+ 1. n_samples=500
+
+How many rows you want in your synthetic dataset.
+-------------------------------------------------------------------------
+
+ 500 rows of data.
+ If you're training anything more than a toy model, 500 is tiny — expect unstable results.
+
+ 2. n_features=10
+
+Total number of input features (columns).
+---------------------------------------------------------
+
+ The function will generate 10 independent variables.
+ Don’t assume all 10 matter — that’s what n_informative is for.
+
+ 3. n_informative=5
+
+How many of those features actually affect the target variable.
+---------------------------------------------------------------------------------------
+
+ Only 5 features will be used to compute the real underlying linear relationship.
+ The other 5 are pure noise/useless.
+ This is how you test whether your model can identify signal vs junk.
+
+If you set this wrong (e.g., too high relative to n_features), you're basically lying to yourself about how "realistic" your synthetic data is.
+
+ 4. noise=25.8
+
+Standard deviation of the Gaussian noise added to the target variable.
+
+ Bigger noise means dirtier data.
+---------------------------------------------
+ 25.8 is not small — your signal-to-noise ratio will drop hard.
+ Expect weaker R² and more unstable coefficients.
+
+If you're trying to teach regression basics, this is borderline too high unless you want students to struggle.
+
+
+
+ 5. random_state=0
+s
+Controls reproducibility.
+--------------------------------
+ Same seed → same data every run.
+ Useful for teaching or debugging.
+ If you leave it unset, every run produces different data, and your examples will become inconsistent.
+
+
+This setup gives you:
+==================
+ 500 samples
+ 10 total features
+ Only 5 features actually influence the target
+ A very noisy regression problem
+ Reproducible output
